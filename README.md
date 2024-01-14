@@ -1,24 +1,39 @@
-# Install 
+# WEBGPU TEMPLATE
+
+remember webgpu is still incompatible in many browsers
+
+---
+
+### Install
+
 ```bash
-yarn install 
+yarn install
 ```
+
 ```bash
 npm install
 ```
 
-# Running Development Server
+---
+
+### Running Development Server
+
 ```bash
 yarn dev
 ```
+
 ```bash
 npm run dev
 ```
 
-# Build
+---
+
+### Build
+
 ```bash
 yarn build
 ```
+
 ```bash
 npm run build
 ```
-
