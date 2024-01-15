@@ -101,8 +101,8 @@ export class Renderer {
 		}) as GPURenderPipeline;
 	}
 	resize_to_picture(size: number) {
-		this.cnv.width = Math.round(size * this.picture.get_aspect());
-		this.cnv.height = Math.round(size);
+		this.cnv.height = Math.round(size / this.picture.get_aspect());
+		this.cnv.width = Math.round(size);
 	}
 
 	render() {
