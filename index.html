@@ -4,18 +4,32 @@
 		<meta charset="UTF-8" />
 		<link rel="icon" type="image/svg+xml" href="/vite.svg" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
+		<link rel="stylesheet" href="/css/main.css" />
 		<title>WEBGPU</title>
 	</head>
 	<body>
-		<div id="text-div">
-			<p id="msg"></p>
+		<div id="input-div">
+			<input type="file" accept="image/*" />
 		</div>
 		<div id="link-div">
 			<button>Start</button>
 			<a download="sample.png">Download</a>
 		</div>
-		<div id="img-box"></div>
+
+		<div id="img-div">
+			<div>
+				<p>Input</p>
+				<img src="/sample.jpg" alt="input-image" id="input-image" />
+			</div>
+			<div id="output-div">
+				<p>Output</p>
+
+				<img src="/sample.jpg" alt="output-image" id="output-image" />
+			</div>
+		</div>
+		<div id="text-div">
+			<p id="msg"></p>
+		</div>
 		<script type="module" src="/src/main.ts"></script>
 	</body>
 </html>

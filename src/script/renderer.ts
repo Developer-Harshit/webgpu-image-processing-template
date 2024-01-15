@@ -1,11 +1,9 @@
 import shader from "../shader/shader.wgsl?raw";
-import { msg } from "./debug";
+
 import { Picture } from "./Picture";
 
 export class Renderer {
 	cnv: HTMLCanvasElement;
-	isrunning: boolean;
-	frameCount: number;
 
 	// Device/Ctx objects
 	adapter: GPUAdapter;
@@ -35,10 +33,10 @@ export class Renderer {
 			alphaMode: "opaque",
 		});
 	}
-	async create_assets() {
-		this.picture = new Picture();
-		await this.picture.init(this.device, "/sample.jpg");
+	set_picture(pic: Picture) {
+		this.picture = pic;
 	}
+
 	async make_pipeline() {
 		const bindGroupLayout = this.device.createBindGroupLayout({
 			entries: [
@@ -101,8 +99,10 @@ export class Renderer {
 		}) as GPURenderPipeline;
 	}
 	resize_to_picture(size: number) {
-		this.cnv.width = Math.round(size * this.picture.get_aspect());
-		this.cnv.height = Math.round(size);
+		if (size === 0) size = this.picture.dim.width;
+		console.log("size", size);
+		this.cnv.width = Math.round(size);
+		this.cnv.height = Math.round(size / this.picture.get_aspect());
 	}
 
 	render() {
@@ -128,19 +128,5 @@ export class Renderer {
 		renderPass.draw(4, 1, 0, 0);
 		renderPass.end();
 		this.device.queue.submit([commandEncoder.finish()]);
-		msg("Rendering Frame --> " + this.frameCount);
-		this.frameCount += 1;
-		if (this.isrunning) requestAnimationFrame(this.render.bind(this));
-	}
-	async init() {
-		msg("loading");
-		await this.setup_device();
-		msg("setted device");
-		await this.create_assets();
-		msg("got assets");
-		await this.make_pipeline();
-
-		this.frameCount = 0;
-		this.isrunning = true;
 	}
 }
